@@ -28,9 +28,9 @@ app = Flask(__name__)
 
 model = torch.load("./static/model_gorlo.h5")
 
-UPLOAD_FOLDER = './uploads/unknown'
-data_root = './uploads'
-test_dir = './uploads'
+UPLOAD_FOLDER = './uploads_gorlo/unknown'
+data_root = './uploads_gorlo'
+test_dir = './uploads_gorlo'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -65,7 +65,7 @@ def get_prediction():
     inputs, labels, paths = next(iter(test_dataloader))
     submission_df = pd.DataFrame.from_dict({'id': test_img_paths, 'label': test_predictions})
     submission_df['label'] = submission_df['label'].map(lambda pred: 'red' if pred > 0.5 else 'normal')
-    submission_df['id'] = submission_df['id'].str.replace('uploads/unknown/', '')
+    submission_df['id'] = submission_df['id'].str.replace('uploads_gorlo/unknown/', '')
     submission_df['id'] = submission_df['id'].str.replace('.jpg', '')    
     return submission_df
 
@@ -85,19 +85,18 @@ def upload_file():
     return '''
     <!doctype html>
     <head>
-    <title> STOP CORONOVID SERVER</title>
+    <title> Сервер детекции состояния горла по фото.</title>
     </head>
     <body>
-    <h1 align=center> STOP CORONOVID19 project by DataStalker:</h1>
+    <h1 align=center> Проект команды DataStalker:</h1>
     <p align=center><img src="\static\stop_p.png"
         alt="Town trip"></p>
-    <p> Chek foto of throat for Coronovid-19 and over disease.
-    Server detect flue.</p>    
+    <p> Проверьте горло, красное оно у вас или нет.</p>    
     <title>Upload new File</title>
     <table>
    <tr>
     <th>
-    <p>Upload new File</p>
+    <p>загрузите новый файл.</p>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
          <input type=submit value=Upload>
@@ -105,26 +104,17 @@ def upload_file():
 
     </th>
     <th>
-        <p>COVID-19 is an viral respiratory infections agent that shows pronounced intoxication of the body and problems with the respiratory and digestive systems</p></th>
+        <p></p></th>
    </tr>
    <tr>
     <td>
-        <p>COVID-19 spreads:
-Air-drip in case of sneezing and coughing;
-In the contact way
-<p>What to do if you have COVID-19 symptoms:</p>
-<p>see a doctor;
-Not to self-medicate</p> </p>
+        <p></p>
+<p></p> </p>
 
 </td>
     <td>
-        <p><p>How to prevent COVID-19:</p>
-<p>Do not go to the focus of the disease;</p>
-<p>Avoid attending mass events;</p>
-<p>CAREFULLY WASH HANDS;</p>
-<p>Use medical masks;</p>
-<p>Avoid close contact with people who have symptoms of the disease.</p> </p>
-</td>
+        <p><p></p>
+    </td>
   </tr>
  </table>
     </body>
